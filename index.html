@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .wrapper {
+      height: 100vh;
+      position: relative;
+      background: rgb(216, 216, 216);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav {
+      height: 100px;
+      background: black;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .p-name {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .symptom {
+      background-color: whitesmoke;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 1000px;
+      margin-right: 5px;
+      font-size: .8.5em;
+    }
+
+    .main {
+      /* background: red; */
+      flex: 1 0 auto;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left,
+    .right {
+      margin: 0;
+      padding: 0;
+    }
+
+    .left {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(-50%);
+      gap: 30px;
+      left: 0;
+    }
+
+    .right {
+      position: absolute;
+      top: 50%;
+      right: 0px;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(-50%);
+      gap: 30px;
+    }
+
+    .btn {
+      padding: 20px;
+      background: black;
+      color: white;
+      border: none;
+      width: 70px;
+    }
+
+    .patient-data {
+      width: 70%;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+      /* background-color: blue; */
+      padding: 10px 20px;
+      justify-content: space-around;
+    }
+
+    .row input {
+      background-color: none;
+      outline: none;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 1000px;
+      font-size: 1.2em;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="nav">
+      <div class="p-name">
+        Nilesh Bhavsar
+      </div>
+      <div class="symptoms">
+        <span class="symptom">Nausea</span>
+        <span class="symptom">Headache</span>
+        <span class="symptom">Vomiting</span>
+        <span class="symptom">Diareha</span>
+        <span class="symptom">Acidity</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="left">
+        <button class="btn">Enter</button>
+        <button class="btn">Back</button>
+      </div>
+      <div class="right">
+        <button class="btn">Next</button>
+        <!-- <button class="right"></button> -->
+      </div>
+      <div class="patient-data">
+        <div class="row">
+          <div class="meds">
+            <div>
+              Medicine
+            </div>
+
+          </div>
+          <div class="dosage">
+            <div>
+              Dosage
+            </div>
+          </div>
+          <div class="times">
+            <div>
+              Time
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <input type="text" value="pcm">
+
+          <input type="text" value="1-0-1">
+
+          <input type="text" value="a-N-a">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
