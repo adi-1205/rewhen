@@ -1,26 +1,29 @@
 const { mongoose, Schema, model } = require("mongoose")
 
 const ImageSchema = Schema({
-    names:{
-        type:[String]
+    names: {
+        type: [String]
     },
     tags: {
         type: String
     },
-    people:  {
+    people: {
         type: String
     },
-    locations:  {
+    locations: {
         type: String
     },
-    desc:  {
+    desc: {
         type: String
     },
-    date:  {
+    date: {
         type: Date
     }
-})
+},
+    {
+        timestamps: true
+    })
 
-const ImageModel = model('imagedata',ImageSchema)
+const ImageModel = model('imagedata', ImageSchema)
 
 module.exports = ImageModel

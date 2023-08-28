@@ -6,43 +6,19 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 function Display() {
 
   const { images, setImages } = useContext(ImageContext)
-  const { dlt, setDlt } = useContext(ImageContext)
+  var { dlt, setDlt } = useContext(ImageContext)
+  var arr = []
 
   function handleCheckboxChange(e, img) {
-    console.log(e.target.checked);
-
     if (e.target.checked) {
-      setDlt(prevDlt => {
-        return [...prevDlt, img]
-      })
+      dlt = [...dlt, {...img}]
+      setDlt(dlt)
     } else {
-      setDlt(prevDlt => {
-        return prevDlt.filter((i) => {
-          return (i !== img)
-        })
-      })
+      dlt = dlt.filter(i => i.name != img)
+      setDlt(dlt)
     }
-
-
-    console.log(dlt);
   }
   return (
-    // <div className='display'>
-    //   {
-    //     images.map((image) => {
-    //       return (
-    //         <div className='image_card'>
-    //           <a href={'http://localhost:8000/'+image}>
-    //             <LazyLoadImage src={'http://localhost:8000/'+image} />
-    //           </a>
-    //             <div className='image_data'>
-    //               This is your data
-    //             </div>
-    //         </div>
-    //       )
-    //     })
-    //   }
-    // </div>
 
 
     <div className='display'>
@@ -54,14 +30,14 @@ function Display() {
               <article className='content'>
                 <a href={'http://localhost:8000/' + image.name.split(',')[0]}>
                   <div className='content-overlay'></div>
-                  <img className='content-image' src={'http://localhost:8000/' + image.name.split(',')[0]} alt='' />
+                  <LazyLoadImage className='content-image' src={'http://localhost:8000/' + image.name.split(',')[0]} alt='' />
                   <div className='content-details fadeIn-bottom'>
                     <h2 className='content-title'><span style={{ fontWeight: 500 }}>Tags:</span> {image.tags}</h2>
                     <p className='content-text'>{image.name.split(',')[1]}</p>
                     <label className="cont">
                       Delete
                       <input type="checkbox" onChange={(e) => {
-                        handleCheckboxChange(e, image.name.split(',')[0])
+                        handleCheckboxChange(e, image)
                       }} />
                       <span className="checkmark"></span>
                     </label>

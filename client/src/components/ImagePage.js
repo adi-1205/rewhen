@@ -10,7 +10,7 @@ function ImagePage() {
   const [dlt, setDlt] = useState([])
   return (
     <div className='container'>
-      <ImageContext.Provider value={{ images, setImages , dlt, setDlt}}>
+      <ImageContext.Provider value={{ images, setImages ,dlt, setDlt}}>
         <Sidebar />
         <Display />
       </ImageContext.Provider >

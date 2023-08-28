@@ -7,7 +7,7 @@ const ImageModel = require('./models/imagedata.model')
 const { log } = require('console')
 require('./models/conn')
 const app = express()
-
+const fs = require('fs')
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -45,8 +45,6 @@ app.post('/up', upload.any(), async (req, res) => {
 
 app.post('/images', async (req, res) => {
 
-    console.log(req.body);
-
     try {
         const filter = req.body.filter
         var info
@@ -80,10 +78,9 @@ app.post('/images', async (req, res) => {
             obj = info[i]
             arr = obj.names
             arr.forEach(image => {
-                images.push({tags:obj.tags,name:image})
+                images.push({ tags: obj.tags, name: image, groupId: obj.createdAt })
             });
         }
-        // console.log(images);
         res.json(images)
     } catch (e) {
         console.log(e);
@@ -91,5 +88,45 @@ app.post('/images', async (req, res) => {
     }
 
 });
+
+app.delete('/images', async (req, res) => {
+    files = req.body.files;
+    gIds = [...new Set(req.body.files.map(file => file.groupId))]
+    names = req.body.files.map(file => file.name)
+    try {
+        info = await ImageModel.updateMany({ createdAt: { $in: gIds } }, { $pullAll: { names: names } })
+        del = await ImageModel.deleteOne({ names: { $exists: true, $size: 0 } });
+    } catch (error) {
+        console.log(error);
+    }
+    try {
+        deleteFiles(names.map(name => `${__dirname}/multiple/${name.split(',')[0]}`), function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('all files removed');
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    res.json({ message: 'ok' })
+
+    function deleteFiles(files, callback) {
+        var i = files.length;
+        files.forEach(function (filepath) {
+            fs.unlink(filepath, function (err) {
+                i--;
+                if (err) {
+                    callback(err);
+                    return;
+                } else if (i <= 0) {
+                    callback(null);
+                }
+            });
+        });
+    }
+
+})
 
 app.listen(8000, () => console.log('Listening'))

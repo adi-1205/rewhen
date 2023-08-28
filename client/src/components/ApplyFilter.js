@@ -33,7 +33,7 @@ function ApplyFilter() {
             fd.append(key, value)
         }
 
-        if (formVal['tags'] && files.length) {
+        if (formVal['tags'] && files.length>0) {
             setPHid('show')
             axios.post('http://localhost:8000/up', fd, {
                 onUploadProgress: (progressEvent) => {
