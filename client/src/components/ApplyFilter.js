@@ -25,15 +25,14 @@ function ApplyFilter() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        files.forEach(file => {
-            fd.append('file', file)
-        })
+        if (formVal['tags'] && files.length > 0) {
 
-        for (const [key, value] of Object.entries(formVal)) {
-            fd.append(key, value)
-        }
-
-        if (formVal['tags'] && files.length>0) {
+            files.forEach(file => {
+                fd.append('file', file)
+            })
+            for (const [key, value] of Object.entries(formVal)) {
+                fd.append(key, value)
+            }
             setPHid('show')
             axios.post('http://localhost:8000/up', fd, {
                 onUploadProgress: (progressEvent) => {
@@ -55,7 +54,7 @@ function ApplyFilter() {
                 .catch(er => console.log(er))
             console.log(pHid + '_3_' + uHid);
         }
-        else{
+        else {
             setVHid('')
         }
     }
@@ -63,7 +62,7 @@ function ApplyFilter() {
 
     return (
         <div className='apply_filter'>
-            <div className={'valid ' +vHid}>
+            <div className={'valid ' + vHid}>
                 Please Enter Tags and Files!!
             </div>
             <div className='filter_box'>
